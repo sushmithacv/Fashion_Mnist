@@ -132,7 +132,7 @@ st.markdown(
 )
 
 # App title with an animated effect
-st.markdown("<h1>🧥 Fashion MNIST Classifier</h1>", unsafe_allow_html=True)
+st.markdown("<h1>Fashion MNIST Classifier</h1>", unsafe_allow_html=True)
 
 # Sidebar instructions
 st.sidebar.markdown("<h3>Navigation</h3>", unsafe_allow_html=True)
