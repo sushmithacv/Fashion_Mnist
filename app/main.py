@@ -12,10 +12,9 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Define paths and load the pre-trained model
+# Define paths
 working_dir = os.path.dirname(os.path.abspath(__file__))
 model_path = os.path.join(working_dir, 'trained_model', 'trained_fashion_mnist_model.h5')
-print(f"Model path: {model_path}")  # Debugging line
 
 # Function to load the model
 def load_model():
@@ -26,7 +25,8 @@ def load_model():
         st.error(f"Error loading model: {e}")
         return None
 
-model = load_model()  # Load the model at the start
+# Load the model
+model = load_model()
 
 # Define class labels for the Fashion MNIST dataset
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
@@ -57,18 +57,17 @@ st.markdown(
     <style>
     /* General style for the app */
     body {
-        background-color: #f8f9fa;
+        background-color: #f5f5f5;
         font-family: 'Arial', sans-serif;
-        color: #343a40; /* Dark gray for text */
     }
 
-    /* Button style */
+    /* Custom button style */
     .stButton button {
-        background-color: #007bff; /* Bootstrap primary color */
+        background-color: #007bff;
         color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 10px;
+        border: 1px solid #0056b3;
+        border-radius: 12px;
+        padding: 12px;
         width: 100%;
         font-size: 18px;
         transition: all 0.3s ease;
@@ -76,23 +75,25 @@ st.markdown(
 
     /* Hover effect for buttons */
     .stButton button:hover {
-        background-color: #0056b3; /* Darker shade on hover */
+        background-color: #0056b3;
+        color: #fff;
         transform: scale(1.05);
-        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     }
 
-    /* Header style */
+    /* Custom header style */
     h1 {
-        color: #007bff; /* Bootstrap primary color */
+        color: #007bff;
         text-align: center;
         margin-bottom: 20px;
         font-size: 2.5rem;
+        animation: fadeIn 2s;
     }
 
     /* Image border styling */
     .stImage img {
-        border: 5px solid #007bff;
-        border-radius: 8px;
+        border: 5px solid #0056b3;
+        border-radius: 15px;
         transition: transform 0.2s;
     }
 
@@ -100,7 +101,17 @@ st.markdown(
         transform: scale(1.05);
     }
 
-    /* Footer style */
+    /* Animation for header */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Custom footer style */
     .footer {
         position: fixed;
         bottom: 0;
@@ -116,7 +127,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-# App title
+# App title with an animated effect
 st.markdown("<h1>🧥 Fashion MNIST Classifier</h1>", unsafe_allow_html=True)
 
 # Sidebar instructions
@@ -129,7 +140,7 @@ st.sidebar.info(
     """
 )
 
-# File uploader widget
+# File uploader widget with advanced design
 uploaded_image = st.file_uploader("🔼 Upload a Fashion Item Image", type=["jpg", "jpeg", "png"])
 
 if uploaded_image is not None:
@@ -147,27 +158,24 @@ if uploaded_image is not None:
         resized_img = image.resize((28, 28))
         st.image(resized_img, caption="Resized for Model Input", width=150)
 
-    # Classify button
+    # Custom classify button with animations
     if st.button('🧠 Classify Fashion Item'):
-        if model is not None:  # Check if the model is loaded successfully
-            img_array = preprocess_image(uploaded_image)
+        img_array = preprocess_image(uploaded_image)
 
-            if img_array is not None:
-                with st.spinner('Processing...'):
-                    result = model.predict(img_array)
-                    predicted_class = np.argmax(result)
-                    confidence = np.max(result)
+        if img_array is not None and model is not None:
+            with st.spinner('Processing...'):
+                result = model.predict(img_array)
+                predicted_class = np.argmax(result)
+                confidence = np.max(result)
 
-                # Display the prediction result and confidence score
-                st.success(f'🛍️ Prediction: **{class_names[predicted_class]}**')
-                st.info(f'📊 Confidence: **{confidence:.2f}**')
+            # Display the prediction result and confidence score
+            st.success(f'🛍️ Prediction: **{class_names[predicted_class]}**')
+            st.info(f'📊 Confidence: **{confidence:.2f}**')
 
-                # Enhance the user experience with animations
-                st.balloons()
-            else:
-                st.error('Image could not be processed for prediction.')
+            # Enhance the user experience with animations
+            st.balloons()
         else:
-            st.error("The model is not loaded. Please check the logs for more information.")
+            st.error('Image could not be processed for prediction or model is not loaded.')
 else:
     st.info("Please upload an image to start classification.")
 
