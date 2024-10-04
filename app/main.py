@@ -7,6 +7,7 @@ from PIL import Image
 # Set custom page configuration
 st.set_page_config(
     page_title="Fashion MNIST Classifier",
+    page_icon="🧥",
     layout="centered",
     initial_sidebar_state="expanded"
 )
@@ -47,23 +48,23 @@ def preprocess_image(image):
         st.error(f"Error processing the image: {e}")
         return None
 
-# Custom CSS for styling
+# Custom advanced CSS for styling
 st.markdown(
     """
     <style>
     /* General style for the app */
     body {
-        background-color: white;  /* White background */
-        color: black;              /* Black text */
+        background-color: white;
         font-family: 'Arial', sans-serif;
+        color: black;
     }
 
     /* Custom button style */
     .stButton button {
-        background-color: #007bff;
+        background-color: #4CAF50; /* Green button background */
         color: white;
-        border: 1px solid #0056b3;
-        border-radius: 8px;
+        border: 2px solid #3e8e41; /* Darker green border */
+        border-radius: 12px;
         padding: 12px;
         width: 100%;
         font-size: 18px;
@@ -72,15 +73,15 @@ st.markdown(
 
     /* Hover effect for buttons */
     .stButton button:hover {
-        background-color: #0056b3;
-        color: #fff;
+        background-color: #45a049; /* Lighter green on hover */
+        border-color: #367c3c; /* Darker border on hover */
         transform: scale(1.05);
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     }
 
     /* Custom header style */
     h1 {
-        color: #007bff;
+        color: #4CAF50; /* Green header color */
         text-align: center;
         margin-bottom: 20px;
         font-size: 2.5rem;
@@ -89,8 +90,8 @@ st.markdown(
 
     /* Image border styling */
     .stImage img {
-        border: 5px solid #007bff;
-        border-radius: 10px;
+        border: 3px solid #4CAF50; /* Green image border */
+        border-radius: 15px;
         transition: transform 0.2s;
     }
 
@@ -113,12 +114,19 @@ st.markdown(
         position: fixed;
         bottom: 0;
         width: 100%;
-        background-color: #007bff;
+        background-color: #4CAF50; /* Footer background color */
         color: white;
         text-align: center;
         padding: 10px;
         font-size: 14px;
-        border-top: 2px solid #0056b3;
+        border-top: 2px solid #367c3c; /* Darker border on top */
+    }
+
+    /* Sidebar styles */
+    .sidebar .sidebar-content {
+        background-color: #f5f5f5; /* Light background for sidebar */
+        padding: 20px;
+        border-radius: 10px;
     }
     </style>
     """, unsafe_allow_html=True
@@ -166,8 +174,8 @@ if uploaded_image is not None:
                 confidence = np.max(result)
 
             # Display the prediction result and confidence score
-            st.success(f'🛍 Prediction: **{class_names[predicted_class]}**')
-            st.info(f' Confidence: **{confidence:.2f}**')
+            st.success(f'🛍️ Prediction: **{class_names[predicted_class]}**')
+            st.info(f'📊 Confidence: **{confidence:.2f}**')
 
             # Enhance the user experience with animations
             st.balloons()
