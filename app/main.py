@@ -28,6 +28,10 @@ def load_model():
 # Load the model
 model = load_model()
 
+# Load the pre-trained model
+model_path = 'trained_model/trained_fashion_mnist_model.h5'  # Ensure this path is correct
+model = tf.keras.models.load_model(model_path)
+
 # Define class labels for the Fashion MNIST dataset
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
                'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
