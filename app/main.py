@@ -21,16 +21,16 @@ def load_model():
     try:
         model = tf.keras.models.load_model(model_path)
         return model
-    except OSError as e:
+    except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
 
 # Load the model
 model = load_model()
 
-# Load the pre-trained model
-model_path = 'trained_model/trained_fashion_mnist_model.h5'  # Ensure this path is correct
-model = tf.keras.models.load_model(model_path)
+# Check if the model is loaded correctly
+if model is None:
+    st.error("Model could not be loaded. Please check the model path and try again.")
 
 # Define class labels for the Fashion MNIST dataset
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
@@ -38,12 +38,6 @@ class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat',
 
 # Function to preprocess the uploaded image
 def preprocess_image(image):
-    """
-    Preprocess the input image for prediction:
-    - Convert to grayscale
-    - Resize to 28x28 pixels
-    - Normalize pixel values
-    """
     try:
         img = Image.open(image)
         img = img.resize((28, 28))  # Resize to 28x28
