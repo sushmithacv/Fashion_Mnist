@@ -7,7 +7,6 @@ from PIL import Image
 # Set custom page configuration
 st.set_page_config(
     page_title="Fashion MNIST Classifier",
-    page_icon="🧥",
     layout="centered",
     initial_sidebar_state="expanded"
 )
@@ -48,13 +47,14 @@ def preprocess_image(image):
         st.error(f"Error processing the image: {e}")
         return None
 
-# Custom advanced CSS for styling
+# Custom CSS for styling
 st.markdown(
     """
     <style>
     /* General style for the app */
     body {
-        background-color: #f5f5f5;
+        background-color: white;  /* White background */
+        color: black;              /* Black text */
         font-family: 'Arial', sans-serif;
     }
 
@@ -63,7 +63,7 @@ st.markdown(
         background-color: #007bff;
         color: white;
         border: 1px solid #0056b3;
-        border-radius: 12px;
+        border-radius: 8px;
         padding: 12px;
         width: 100%;
         font-size: 18px;
@@ -89,8 +89,8 @@ st.markdown(
 
     /* Image border styling */
     .stImage img {
-        border: 5px solid #0056b3;
-        border-radius: 15px;
+        border: 5px solid #007bff;
+        border-radius: 10px;
         transition: transform 0.2s;
     }
 
@@ -166,8 +166,8 @@ if uploaded_image is not None:
                 confidence = np.max(result)
 
             # Display the prediction result and confidence score
-            st.success(f'🛍️ Prediction: **{class_names[predicted_class]}**')
-            st.info(f'📊 Confidence: **{confidence:.2f}**')
+            st.success(f'🛍 Prediction: **{class_names[predicted_class]}**')
+            st.info(f' Confidence: **{confidence:.2f}**')
 
             # Enhance the user experience with animations
             st.balloons()
