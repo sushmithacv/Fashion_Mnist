@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # Define model path
-model_path = 'trained_model/trained_fashion_mnist_model.h5'  # Ensure this path is correct
+model_path = 'app/trained_model/trained_fashion_mnist_model.h5'  # Ensure this path is correct
 
 # Function to load the model
 def load_model(model_path):
