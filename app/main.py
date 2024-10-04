@@ -12,12 +12,11 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Define paths
-working_dir = os.path.dirname(os.path.abspath(__file__))
-model_path = os.path.join(working_dir, 'trained_model', 'trained_fashion_mnist_model.h5')
+# Define model path
+model_path = 'trained_model/trained_fashion_mnist_model.h5'  # Ensure this path is correct
 
 # Function to load the model
-def load_model():
+def load_model(model_path):
     try:
         model = tf.keras.models.load_model(model_path)
         return model
@@ -26,7 +25,7 @@ def load_model():
         return None
 
 # Load the model
-model = load_model()
+model = load_model(model_path)
 
 # Check if the model is loaded correctly
 if model is None:
