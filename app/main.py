@@ -7,7 +7,6 @@ from PIL import Image
 # Set custom page configuration
 st.set_page_config(
     page_title="Fashion MNIST Classifier",
-    page_icon="🧥",
     layout="centered",
     initial_sidebar_state="expanded"
 )
@@ -164,7 +163,7 @@ if uploaded_image is not None:
         st.image(resized_img, caption="Resized for Model Input", width=150)
 
     # Custom classify button with animations
-    if st.button('🧠 Classify Fashion Item'):
+    if st.button(' Classify Fashion Item'):
         img_array = preprocess_image(uploaded_image)
 
         if img_array is not None and model is not None:
@@ -174,8 +173,8 @@ if uploaded_image is not None:
                 confidence = np.max(result)
 
             # Display the prediction result and confidence score
-            st.success(f'🛍️ Prediction: **{class_names[predicted_class]}**')
-            st.info(f'📊 Confidence: **{confidence:.2f}**')
+            st.success(f' Prediction: **{class_names[predicted_class]}**')
+            st.info(f' Confidence: **{confidence:.2f}**')
 
             # Enhance the user experience with animations
             st.balloons()
@@ -188,7 +187,7 @@ else:
 st.markdown(
     """
     <div class="footer">
-        Developed by Your Name | Fashion MNIST Classifier App
+        Developed by Sushmitha | Fashion MNIST Classifier App
     </div>
     """, unsafe_allow_html=True
 )
